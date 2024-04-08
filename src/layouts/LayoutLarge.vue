@@ -49,4 +49,19 @@ footer {
   background-color: #eeeeee;
   grid-area: footer;
 }
+aside {
+  border-right: #eeeeee 1px solid;
+  box-shadow: 0 0 10px 0 #eeeeee;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  grid-area: aside;
+}
+main {
+  min-height: 80%;
+  padding: 2rem;
+  grid-area: main;
+}
 </style>
