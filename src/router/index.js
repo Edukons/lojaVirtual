@@ -7,15 +7,15 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      component: LayoutFull;
+      component: LayoutFull,
       children: [
-    {
-      path: '/',
-      name: 'home',
-      component: HomeView
+        {
+          path: '/',
+          name: 'home',
+          component: HomeView
+        }
+      ]
     }
-  ]
-  }
   ]
 })
 

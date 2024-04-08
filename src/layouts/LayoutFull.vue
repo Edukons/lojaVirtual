@@ -1,6 +1,7 @@
 <script setup>
-import {useLayout} from '@/composables/layout';
-const { layout } = useLayout(); 
+import { useLayout } from '@/composables/layout'
+const { layout } = useLayout();
+
 </script>
 
 <template>

@@ -1,26 +1,34 @@
-import { defineAsyncComponent, ShallowRef, onMounted, onUnmounted } from "vue"
+import { defineAsyncComponent, onMounted, onUnmounted, shallowRef } from 'vue';
 
-export default function useLayout(){
-    const layout = ShallowRef()
+export function useLayout() {
+  const layout = shallowRef();
 
-    const onResize = () => {
-        const width = window.innerWidth
-        if (width < 768){
-            layout.value = defineAsyncComponent(() => import('@/layout/LayoutSmall.vue'))
-        } else if(width < 1024){
-            layout.value = defineAsyncComponent(() => import('@/layout/Layoutmedium.vue'))
-        }else{
-            layout.value = defineAsyncComponent(() => import('@/layout/LayoutLarge.vue'))
-        }
+  const updateLayout = () => {
+    const width = window.innerWidth;
+    if (width < 768) {
+      layout.value = defineAsyncComponent(() =>
+        import('@/layouts/LayoutSmall.vue'),
+      );
+    } else if (width < 1200) {
+      layout.value = defineAsyncComponent(() =>
+        import('@/layouts/LayoutMedium.vue'),
+      );
+    } else {
+      layout.value = defineAsyncComponent(() =>
+        import('@/layouts/LayoutLarge.vue'),
+      );
     }
-onMounted(() =>{
-    window.addEventListener('resize', 'onResize')
-    onResize()
-})
-onUnmounted(() => {
-    window.removeEventListener('resize', onResize)
-})
+  };
 
-return { layout }
+  onMounted(() => {
+    updateLayout();
+    window.addEventListener('resize', updateLayout);
+  });
+
+  onUnmounted(() => {
+    window.removeEventListener('resize', updateLayout);
+  });
+
+  return { layout };
 }
 
